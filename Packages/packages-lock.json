@@ -1,5 +1,26 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "cfe509a55602ba5be6df7fa0468b10298b8a053d"
+    },
+    "com.demigiant.dotween": {
+      "version": "https://github.com/yoshida190/dotween.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9f1c3648a838f759c70b08bb66468532951e0ea7"
+    },
+    "com.svermeulen.extenject": {
+      "version": "https://github.com/starikcetin/Extenject.git?path=UnityProject/Assets/Plugins/Zenject",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f5453b2e2008663c3d6a1bbafa678705eaf5e843"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.6",
       "depth": 1,
