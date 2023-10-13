@@ -29,6 +29,7 @@ namespace Installers
 
 			Container.Bind<LevelFactory>().AsSingle();
 			Container.Bind<EntitiesFactory>().AsSingle();
+			Container.Bind<VisualsService>().AsSingle();
 
 			Container.Bind<GameStateMachine>().AsSingle();
 			

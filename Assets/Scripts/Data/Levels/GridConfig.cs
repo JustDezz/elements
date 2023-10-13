@@ -2,7 +2,7 @@
 
 namespace Data.Levels
 {
-	[CreateAssetMenu(menuName = SOConstants.Configs + "Grid Config")]
+	[CreateAssetMenu(menuName = SOConstants.Levels + "Grid Config")]
 	public class GridConfig : ScriptableObject
 	{
 		[SerializeField] private Vector2 _origin;

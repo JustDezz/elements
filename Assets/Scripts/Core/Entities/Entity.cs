@@ -1,9 +1,10 @@
 ﻿using Data.Entities;
+using Tools.ComponentsComposition;
 using UnityEngine;
 
 namespace Core.Entities
 {
-	public abstract class Entity : MonoBehaviour
+	public abstract class Entity : ComponentsRoot
 	{
 		public Vector2Int Position { get; set; }
 		

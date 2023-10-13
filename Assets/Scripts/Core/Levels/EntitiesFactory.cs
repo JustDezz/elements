@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core.Entities;
 using Data.Entities;
+using Data.Levels;
 using Tools.Extensions;
 using UnityEngine;
 using Zenject;
@@ -31,6 +32,26 @@ namespace Core.Levels
 				
 				_prefabs.Add(dataType, prefab);
 			}
+		}
+
+		public Entity[] Create(EntityDescription[] descriptions, CellGrid grid, Transform parent)
+		{
+			Entity[] entities = new Entity[descriptions.Length];
+
+			for (int i = 0; i < descriptions.Length; i++)
+			{
+				EntityDescription description = descriptions[i];
+				Vector2Int cellIndex = description.Position;
+				Entity entity = Create(description.Data, parent);
+				
+				Transform entityTransform = entity.transform;
+				entity.Position = cellIndex;
+				entityTransform.position = grid.ToWorld(cellIndex, Vector2.zero);
+				entityTransform.localScale = grid.CellSize.XY1();
+				entities[i] = entity;
+			}
+			
+			return entities;
 		}
 		
 		public Entity Create(EntityData entityData, Transform parent)

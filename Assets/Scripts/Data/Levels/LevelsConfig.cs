@@ -2,7 +2,7 @@
 
 namespace Data.Levels
 {
-	[CreateAssetMenu(menuName = SOConstants.Configs + "Levels Config")]
+	[CreateAssetMenu(menuName = SOConstants.Levels + "Levels Config")]
 	public class LevelsConfig : ScriptableObject
 	{
 		[SerializeField] private LevelDescription[] _levels;

@@ -7,44 +7,43 @@ namespace Core.Levels
 	public class LevelFactory
 	{
 		private readonly EntitiesFactory _entitiesFactory;
+		private readonly VisualsService _visualsService;
 		private readonly GridConfig _gridConfig;
 
-		private Transform _levelRoot;
-
-		public LevelFactory(EntitiesFactory entitiesFactory, GridConfig gridConfig)
+		public LevelFactory(EntitiesFactory entitiesFactory, VisualsService visualsService, GridConfig gridConfig)
 		{
-			_gridConfig = gridConfig;
 			_entitiesFactory = entitiesFactory;
+			_visualsService = visualsService;
+			_gridConfig = gridConfig;
 		}
 
 		public Level Create(LevelDescription description)
 		{
-			_levelRoot = new GameObject(description.name).transform;
+			LevelCreationContext context = new()
+			{
+				Description = description,
+				LevelRoot = new GameObject(description.name).transform,
+				Grid = new CellGrid(_gridConfig.Origin, _gridConfig.CellSize, _gridConfig.CellGap)
+			};
+
+			context.Entities = CreateEntities(context);
+			_visualsService.ApplyVisuals(description.Visuals, context.Entities);
 			
-			CellGrid grid = new(_gridConfig.Origin, _gridConfig.CellSize, _gridConfig.CellGap);
-			Entity[] entities = CreateEntities(grid, description.Entities);
-			
-			return new Level(description, entities, grid);
+			return context.ToLevel();
 		}
 
 		public void Clear(Level level)
 		{
-			if (_levelRoot != null) Object.Destroy(_levelRoot.gameObject);
+			if (level.Root != null) Object.Destroy(level.Root.gameObject);
 		}
 
-		private Entity[] CreateEntities(CellGrid grid, EntityDescription[] descriptions)
+		private Entity[] CreateEntities(LevelCreationContext context)
 		{
-			Entity[] entities = new Entity[descriptions.Length];
-			for (int i = 0; i < descriptions.Length; i++)
-			{
-				EntityDescription description = descriptions[i];
-				Entity entity = _entitiesFactory.Create(description.Data, _levelRoot);
-				Vector2Int cellIndex = description.Position;
-				entity.Position = cellIndex;
-				entity.transform.position = grid.ToWorld(cellIndex, Vector2.zero);
-				entities[i] = entity;
-			}
-			return entities;
+			Transform entitiesRoot = new GameObject("Entities").transform;
+			entitiesRoot.parent = context.LevelRoot;
+			context.EntitiesRoot = entitiesRoot;
+
+			return _entitiesFactory.Create(context.Description.Entities, context.Grid, context.EntitiesRoot);
 		}
 	}
 }

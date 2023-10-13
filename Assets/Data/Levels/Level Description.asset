@@ -15,35 +15,68 @@ MonoBehaviour:
   _entities:
   - _position: {x: 0, y: 0}
     _data:
-      rid: 317482072319983616
+      rid: 317482090356801537
   - _position: {x: 1, y: 0}
     _data:
-      rid: 317482072319983616
+      rid: 317482090356801538
   - _position: {x: 2, y: 0}
     _data:
-      rid: 317482072319983616
+      rid: 317482090356801539
   - _position: {x: 0, y: 1}
     _data:
-      rid: 317482072319983616
+      rid: 317482090356801540
   - _position: {x: 1, y: 1}
     _data:
-      rid: 317482072319983616
+      rid: 317482090356801541
   - _position: {x: 2, y: 1}
     _data:
-      rid: 317482072319983616
+      rid: 317482090356801542
   - _position: {x: 0, y: 2}
     _data:
-      rid: 317482072319983616
+      rid: 317482090356801543
   - _position: {x: 1, y: 2}
     _data:
-      rid: 317482072319983616
+      rid: 317482090356801544
   - _position: {x: 2, y: 2}
     _data:
-      rid: 317482072319983616
+      rid: 317482090356801545
+  _visuals: {fileID: 11400000, guid: 0bf0a4dcb176c98429f3202fff672f50, type: 2}
   references:
     version: 2
     RefIds:
-    - rid: 317482072319983616
+    - rid: 317482090356801537
       type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
       data:
-        _type: 0
+        _group: 1
+    - rid: 317482090356801538
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
+    - rid: 317482090356801539
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 0
+    - rid: 317482090356801540
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 0
+    - rid: 317482090356801541
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
+    - rid: 317482090356801542
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
+    - rid: 317482090356801543
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
+    - rid: 317482090356801544
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 0
+    - rid: 317482090356801545
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
