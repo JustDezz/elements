@@ -1,5 +1,4 @@
-﻿using Data.Entities;
-using Data.Levels.Visuals;
+﻿using Data.Levels.Visuals;
 using UnityEngine;
 
 namespace Data.Levels
@@ -7,20 +6,23 @@ namespace Data.Levels
 	[CreateAssetMenu(menuName = SOConstants.Levels + "New Level")]
 	public class LevelDescription : ScriptableObject
 	{
-		[SerializeField] private EntityDescription[] _entities;
 		[SerializeField] private VisualSettings _visuals;
+		
+		[SerializeField] [Min(1)] private Vector2Int _size;
+		[SerializeField] private EntityDescription[] _entities;
 
-		public EntityDescription[] Entities => _entities;
 		public VisualSettings Visuals => _visuals;
 
-		private void OnValidate()
+		public Vector2Int Size
 		{
-			for (int i = 0; i < _entities.Length; i++)
-			{
-				EntityDescription entity = _entities[i];
-				entity.Data ??= new BrickData();
-				_entities[i] = entity;
-			}
+			get => _size;
+			set => _size = value;
+		}
+
+		public EntityDescription[] Entities
+		{
+			get => _entities;
+			set => _entities = value;
 		}
 	}
 }
