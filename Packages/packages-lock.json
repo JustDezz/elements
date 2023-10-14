@@ -14,6 +14,13 @@
       "dependencies": {},
       "hash": "9f1c3648a838f759c70b08bb66468532951e0ea7"
     },
+    "com.mackysoft.serializereference-extensions": {
+      "version": "https://github.com/mackysoft/Unity-SerializeReferenceExtensions.git?path=Assets/MackySoft/MackySoft.SerializeReferenceExtensions",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "cdcbbedf21f4ccfc8108a2c893ad073e02c9ff62"
+    },
     "com.svermeulen.extenject": {
       "version": "https://github.com/starikcetin/Extenject.git?path=UnityProject/Assets/Plugins/Zenject",
       "depth": 0,
