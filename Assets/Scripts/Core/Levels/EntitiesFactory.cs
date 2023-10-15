@@ -46,7 +46,7 @@ namespace Core.Levels
 				
 				Transform entityTransform = entity.transform;
 				entity.Position = cellIndex;
-				entityTransform.position = grid.ToWorld(cellIndex, Vector2.zero);
+				entityTransform.position = grid.ToWorld(cellIndex, new Vector2(0.5f, 0.5f));
 				entityTransform.localScale = grid.CellSize.XY1();
 				entities[i] = entity;
 			}

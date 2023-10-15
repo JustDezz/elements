@@ -8,6 +8,47 @@ namespace Tools.Extensions
 	public static class VectorExtensions
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int GetSize<T>(this T[,] array) => new(array.GetLength(0), array.GetLength(1));
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int PositionToIndex(this Vector2Int gridSize, Vector2Int pos) => gridSize.PositionToIndex(pos.x, pos.y);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int PositionToIndex(this Vector2Int gridSize, int x, int y) => y * gridSize.x + x;
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int IndexToPosition(this Vector2Int gridSize, int index) => new(index % gridSize.x, index / gridSize.x);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float GetRandom(this Vector2 vector) => Random.Range(vector.x, vector.y);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int GetRandom(this Vector2Int vector) => vector.GetRandom(false);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int GetRandom(this Vector2Int vector, bool inclusive)
+		{
+			if (inclusive) vector.y += 1;
+			return Random.Range(vector.x, vector.y);
+		}
+
+		public static Vector2 Rebase(this Vector3 vector, Vector3 origin, Vector3 up, Vector3 right)
+		{
+			Vector3 shifted = vector - origin;
+			float x = Vector3.Dot(shifted, right);
+			float y = Vector3.Dot(shifted, up);
+			return new Vector2(x, y);
+		}
+		public static Vector3 Rebase(this Vector3 vector, Vector3 origin, Vector3 forward, Vector3 up, Vector3 right)
+		{
+			Vector3 shifted = vector - origin;
+			float x = Vector3.Dot(shifted, right);
+			float y = Vector3.Dot(shifted, up);
+			float z = Vector3.Dot(shifted, forward);
+
+			return new Vector3(x, y, z);
+		}
+	}
+
+	public static class PerComponentOperations
+	{
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Lerp(this Vector2 a, Vector2 b, Vector2 t) =>
 			new(Mathf.Lerp(a.x, b.x, t.x),
 				Mathf.Lerp(a.y, b.y, t.y));
@@ -24,58 +65,37 @@ namespace Tools.Extensions
 				Mathf.Lerp(a.w, b.w, t.w));
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 Multiply(this Vector4 a, Vector4 b) => new(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
+		public static Vector2 Multiply(this Vector2 a, Vector2 b) => new(a.x * b.x, a.y * b.y);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector3 Multiply(this Vector3 a, Vector3 b) => new(a.x * b.x, a.y * b.y, a.z * b.z);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Multiply(this Vector2 a, Vector2 b) => new(a.x * b.x, a.y * b.y);
+		public static Vector4 Multiply(this Vector4 a, Vector4 b) => new(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 Divide(this Vector4 a, Vector4 b) => new(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
+		public static Vector2 Divide(this Vector2 a, Vector2 b) => new(a.x / b.x, a.y / b.y);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector3 Divide(this Vector3 a, Vector3 b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Divide(this Vector2 a, Vector2 b) => new(a.x / b.x, a.y / b.y);
+		public static Vector4 Divide(this Vector4 a, Vector4 b) => new(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2Int Modulo(this Vector2Int a, int b) => new(a.x % b, a.y % b);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 Clamp(this Vector4 source, Vector4 a, Vector4 b) =>
+		public static Vector2 Clamp(this Vector2 source, Vector2 a, Vector2 b) =>
 			new(Mathf.Clamp(source.x, a.x, b.x),
-				Mathf.Clamp(source.y, a.y, b.y),
-				Mathf.Clamp(source.z, a.z, b.z),
-				Mathf.Clamp(source.w, a.w, b.w));
+				Mathf.Clamp(source.y, a.y, b.y));
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector3 Clamp(this Vector3 source, Vector3 a, Vector3 b) =>
 			new(Mathf.Clamp(source.x, a.x, b.x),
 				Mathf.Clamp(source.y, a.y, b.y),
 				Mathf.Clamp(source.z, a.z, b.z));
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Clamp(this Vector2 source, Vector2 a, Vector2 b) =>
+		public static Vector4 Clamp(this Vector4 source, Vector4 a, Vector4 b) =>
 			new(Mathf.Clamp(source.x, a.x, b.x),
-				Mathf.Clamp(source.y, a.y, b.y));
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2Int GetSize<T>(this T[,] array) => new(array.GetLength(0), array.GetLength(1));
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int PositionToIndex(this Vector2Int gridSize, Vector2Int pos) => gridSize.PositionToIndex(pos.x, pos.y);
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int PositionToIndex(this Vector2Int gridSize, int x, int y) => y * gridSize.x + x;
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2Int IndexToPosition(this Vector2Int gridSize, int index) => new(index % gridSize.x, index / gridSize.x);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static float GetRandom(this Vector2 vector) => Random.Range(vector.x, vector.y);
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int GetRandom(this Vector2Int vector) => Random.Range(vector.x, vector.y);
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int GetRandom(this Vector2Int vector, bool inclusive)
-		{
-			if (inclusive) vector.y += 1;
-			return vector.GetRandom();
-		}
+				Mathf.Clamp(source.y, a.y, b.y),
+				Mathf.Clamp(source.z, a.z, b.z),
+				Mathf.Clamp(source.w, a.w, b.w));
 	}
 	
 	[SuppressMessage("ReSharper", "InconsistentNaming")]

@@ -1,8 +1,10 @@
 ﻿using System.Threading;
+using CameraManagement;
 using Core.Levels;
 using Data.Levels;
 using StateMachines;
 using Tools.Extensions;
+using UnityEngine;
 
 namespace Core.GameStates
 {
@@ -22,6 +24,13 @@ namespace Core.GameStates
 		{
 			_cts = new CancellationTokenSource();
 			_currentLevel = _levelFactory.Create(_currentLevelDescription);
+			GameCamera camera = Object.FindObjectOfType<GameCamera>();
+			CellGrid grid = _currentLevel.Grid;
+			Vector3 min = grid.ToWorld(new Vector2Int(-1, 0), Vector2.zero);
+			Vector3 max = grid.ToWorld(_currentLevel.Description.Size + new Vector2Int(0, -1), Vector2.one);
+			Bounds levelBounds = new();
+			levelBounds.SetMinMax(min, max);
+			camera.Frame(levelBounds);
 		}
 
 		public override void OnExit() 

@@ -20,8 +20,8 @@ namespace StateMachines
 		private void SetState(IState targetState)
 		{
 			_currentState?.OnExit();
-			targetState.OnEnter();
 			_currentState = targetState;
+			targetState.OnEnter();
 		}
 	}
 }

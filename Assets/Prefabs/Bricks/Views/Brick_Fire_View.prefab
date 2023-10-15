@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8157128300495186796, guid: d74867492f2a0d340b92e449a9940b37, type: 3}
       propertyPath: m_Name
-      value: Brick_Fire
+      value: Brick_Fire_View
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d74867492f2a0d340b92e449a9940b37, type: 3}
