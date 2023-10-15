@@ -2,6 +2,7 @@
 using Core.Levels;
 using Data.Entities;
 using Data.Levels;
+using GameInput;
 using UnityEngine;
 using Zenject;
 
@@ -27,6 +28,8 @@ namespace Installers
 			BindInstance(_levelsConfig);
 			BindInstance(_gridConfig);
 
+			BindInput();
+			
 			Container.Bind<LevelFactory>().AsSingle();
 			Container.Bind<EntitiesFactory>().AsSingle();
 			Container.Bind<VisualsService>().AsSingle();
@@ -34,6 +37,15 @@ namespace Installers
 			Container.Bind<GameStateMachine>().AsSingle();
 			
 			Container.Bind<IInitializable>().FromInstance(this).AsSingle();
+		}
+
+		private void BindInput()
+		{
+#if UNITY_EDITOR
+			Container.BindInterfacesTo<PCInput>().AsSingle();
+#else
+			Container.BindInterfacesTo<MobileInput>().AsSingle();
+#endif
 		}
 
 		private void BindInstance<T>(T instance) => Container.Bind<T>().FromInstance(instance);
