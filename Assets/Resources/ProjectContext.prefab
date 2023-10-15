@@ -77,3 +77,4 @@ MonoBehaviour:
   _entitiesConfig: {fileID: 11400000, guid: 76ee7b94012d2bd4d849bb388e647ca6, type: 2}
   _levelsConfig: {fileID: 11400000, guid: b5ad222c5250a7b4d9ce1319b4170692, type: 2}
   _gridConfig: {fileID: 11400000, guid: 0d91b4c8b773fed40bca0a9f42d020fe, type: 2}
+  _cameraConfig: {fileID: 11400000, guid: 2b173ae4999701d418b33ca5450020df, type: 2}

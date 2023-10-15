@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CameraManagement
 {
-	public class GameCamera : MonoBehaviour, ICamera
+	public class GameCamera : MonoBehaviour
 	{
 		[SerializeField] private Camera _camera;
 		[SerializeField] private CameraConfig _config;

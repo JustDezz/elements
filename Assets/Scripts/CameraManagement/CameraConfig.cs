@@ -6,12 +6,17 @@ namespace CameraManagement
 	[CreateAssetMenu(menuName = SOConstants.Configs + "Camera Config")]
 	public class CameraConfig : ScriptableObject
 	{
+		[SerializeField] private GameCamera _cameraPrefab;
+
+		[Space]
 		[SerializeField] private float _distance;
 		[SerializeField] private Vector2 _horizontalViewport;
 		[SerializeField] private Vector2 _verticalViewport;
 		[SerializeField] private Vector3 _rotation;
 		
 		public const float MinViewportSize = 0.01f;
+
+		public GameCamera CameraPrefab => _cameraPrefab;
 
 		public float Distance => _distance;
 		public Vector2 HorizontalViewport => _horizontalViewport;

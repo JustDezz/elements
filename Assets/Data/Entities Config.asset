@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3593b1b650745cf85bd562dcf1bee89, type: 3}
   m_Name: Entities Config
   m_EditorClassIdentifier: 
+  _speed: 10
   _entitiesPrefabs:
   - {fileID: -4859596042375548883, guid: 7e57508670ae2a047b1dc03cc0017d9f, type: 3}
