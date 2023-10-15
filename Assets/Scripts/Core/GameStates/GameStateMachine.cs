@@ -22,8 +22,13 @@ namespace Core.GameStates
 		public void Init(IInstantiator instantiator)
 		{
 			object[] extraArgs = {this};
-			States.Add(typeof(BootstrapState), instantiator.Instantiate<BootstrapState>(extraArgs));
-			States.Add(typeof(PlayLevelState), instantiator.Instantiate<PlayLevelState>(extraArgs));
+			AddState<BootstrapState>(instantiator, extraArgs);
+			AddState<BuildLevelState>(instantiator, extraArgs);
+			AddState<PlayLevelState>(instantiator, extraArgs);
+			AddState<CompleteLevelState>(instantiator, extraArgs);
 		}
+
+		private void AddState<T>(IInstantiator instantiator, object[] extraArgs) where T : State =>
+			States.Add(typeof(T), instantiator.Instantiate<T>(extraArgs));
 	}
 }

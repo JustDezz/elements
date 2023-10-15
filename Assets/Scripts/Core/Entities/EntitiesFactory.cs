@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Entities;
+using Core.Levels;
 using Data.Entities;
 using Data.Levels;
 using Tools.Extensions;
 using UnityEngine;
 using Zenject;
 
-namespace Core.Levels
+namespace Core.Entities
 {
 	public class EntitiesFactory
 	{
@@ -46,7 +46,7 @@ namespace Core.Levels
 				
 				Transform entityTransform = entity.transform;
 				entity.Position = cellIndex;
-				entityTransform.position = grid.ToWorld(cellIndex, new Vector2(0.5f, 0.5f));
+				entityTransform.position = grid.ToWorld(cellIndex);
 				entityTransform.localScale = grid.CellSize.XY1();
 				entities[i] = entity;
 			}

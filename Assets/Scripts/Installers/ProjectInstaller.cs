@@ -1,5 +1,8 @@
-﻿using Core.GameStates;
+﻿using CameraManagement;
+using Core.Entities;
+using Core.GameStates;
 using Core.Levels;
+using Core.Services;
 using Data.Entities;
 using Data.Levels;
 using GameInput;
@@ -13,6 +16,7 @@ namespace Installers
 		[SerializeField] private EntitiesConfig _entitiesConfig;
 		[SerializeField] private LevelsConfig _levelsConfig;
 		[SerializeField] private GridConfig _gridConfig;
+		[SerializeField] private CameraConfig _cameraConfig;
 
 		public void Initialize()
 		{
@@ -33,6 +37,11 @@ namespace Installers
 			Container.Bind<LevelFactory>().AsSingle();
 			Container.Bind<EntitiesFactory>().AsSingle();
 			Container.Bind<VisualsService>().AsSingle();
+			Container.Bind<LevelCleaner>().AsSingle();
+			Container.Bind<LevelPlayer>().AsSingle();
+			Container.BindInterfacesTo<CameraFactory>()
+				.FromInstance(new CameraFactory(_cameraConfig))
+				.AsSingle();
 
 			Container.Bind<GameStateMachine>().AsSingle();
 			

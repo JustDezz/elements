@@ -1,42 +1,39 @@
 ﻿using System.Threading;
-using CameraManagement;
 using Core.Levels;
-using Data.Levels;
+using Core.Services;
+using Cysharp.Threading.Tasks;
 using StateMachines;
 using Tools.Extensions;
-using UnityEngine;
 
 namespace Core.GameStates
 {
-	public class PlayLevelState : PayloadState<LevelDescription>
+	public class PlayLevelState : PayloadState<Level>
 	{
-		private readonly LevelFactory _levelFactory;
+		private readonly LevelPlayer _levelPlayer;
 		
 		private CancellationTokenSource _cts;
-		private LevelDescription _currentLevelDescription;
 		private Level _currentLevel;
 
-		public PlayLevelState(StateMachine stateMachine, LevelFactory levelFactory) : base(stateMachine) => _levelFactory = levelFactory;
+		public PlayLevelState(StateMachine stateMachine, LevelPlayer levelPlayer) : base(stateMachine) => _levelPlayer = levelPlayer;
 
-		public override void SetPayload(LevelDescription level) => _currentLevelDescription = level;
+		public override void SetPayload(Level level) => _currentLevel = level;
 
 		public override void OnEnter()
 		{
-			_cts = new CancellationTokenSource();
-			_currentLevel = _levelFactory.Create(_currentLevelDescription);
-			GameCamera camera = Object.FindObjectOfType<GameCamera>();
-			CellGrid grid = _currentLevel.Grid;
-			Vector3 min = grid.ToWorld(new Vector2Int(-1, 0), Vector2.zero);
-			Vector3 max = grid.ToWorld(_currentLevel.Description.Size + new Vector2Int(0, -1), Vector2.one);
-			Bounds levelBounds = new();
-			levelBounds.SetMinMax(min, max);
-			camera.Frame(levelBounds);
+			_cts = CancellationTokenSource.CreateLinkedTokenSource(((GameStateMachine) StateMachine).CT);
+			PlayLevel(_currentLevel, _cts.Token).Forget();
+		}
+
+		private async UniTaskVoid PlayLevel(Level level, CancellationToken ct)
+		{
+			await _levelPlayer.Play(level, ct);
+			StateMachine.Enter<CompleteLevelState, Level>(level);
 		}
 
 		public override void OnExit() 
 		{
-			_levelFactory.Clear(_currentLevel);
 			_cts.CancelAndDispose();
+			_currentLevel = null;
 			_cts = null;
 		}
 	}

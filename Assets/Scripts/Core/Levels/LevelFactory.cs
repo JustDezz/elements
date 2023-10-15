@@ -32,11 +32,6 @@ namespace Core.Levels
 			return context.ToLevel();
 		}
 
-		public void Clear(Level level)
-		{
-			if (level.Root != null) Object.Destroy(level.Root.gameObject);
-		}
-
 		private Entity[] CreateEntities(LevelCreationContext context)
 		{
 			Transform entitiesRoot = new GameObject("Entities").transform;

@@ -6,8 +6,8 @@ namespace Core.Entities
 	{
 		public static class Names
 		{
-			public static int Idle = Animator.StringToHash("Idle");
-			public static int Destroy = Animator.StringToHash("Destroy");
+			public static readonly int Idle = Animator.StringToHash("Idle");
+			public static readonly int Destroy = Animator.StringToHash("Destroy");
 		}
 	}
 }

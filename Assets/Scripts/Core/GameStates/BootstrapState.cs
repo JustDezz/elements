@@ -19,7 +19,7 @@ namespace Core.GameStates
 		public override void OnEnter()
 		{
 			if (_container.Resolve<IInput>() is InputBase input) input.InputLoop(((GameStateMachine) StateMachine).CT).Forget();
-			StateMachine.Enter<PlayLevelState, LevelDescription>(_levelsConfig.Levels[0]);
+			StateMachine.Enter<BuildLevelState, LevelDescription>(_levelsConfig.Levels[0]);
 		}
 
 		public override void OnExit()
