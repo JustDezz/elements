@@ -8,5 +8,6 @@ namespace Core.Entities
 
 		public void Play(int stateHash) => Play(stateHash, 0);
 		public void Play(int stateHash, float normalizedTime) => _animator.Play(stateHash, 0, normalizedTime);
+		public float GetCurrentAnimationDuration() => _animator.GetCurrentAnimatorStateInfo(0).length;
 	}
 }

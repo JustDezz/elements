@@ -72,7 +72,7 @@ namespace Core.Services
 
 			if (direction.y == -1) return endPosition.y >= 0;
 
-			return endPosition.x >= -1 && endPosition.x <= _level.Size.x;
+			return endPosition.x >= 0 && endPosition.x < _level.Size.x;
 		}
 
 		private Entity GetEntityAtPosition(Vector2 screenPosition)

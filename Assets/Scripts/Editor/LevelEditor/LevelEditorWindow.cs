@@ -34,7 +34,7 @@ namespace Editor.LevelEditor
 
 		public static void Open(LevelDescription level)
 		{
-			LevelEditorWindow window = GetWindow<LevelEditorWindow>(true, level.name);
+			LevelEditorWindow window = GetWindow<LevelEditorWindow>(false, level.name);
 
 			Vector2 gridArea = new(500, 500);
 			Vector2 editArea = new(200, 500);
