@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
-using Core.Entities;
 using Core.Levels;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace Core.Services
@@ -19,15 +18,17 @@ namespace Core.Services
 			object[] extraArgs = {level};
 			MoveMaker moveMaker = _instantiator.Instantiate<MoveMaker>(extraArgs);
 			EntityMover mover = _instantiator.Instantiate<EntityMover>(extraArgs);
+			WinCondition winCondition = _instantiator.Instantiate<WinCondition>(extraArgs);
 			FieldNormalizer normalizer = _instantiator.Instantiate<FieldNormalizer>(new object[] {level, mover});
 			while (!ct.IsCancellationRequested)
 			{
-				Move move = await moveMaker.MakeMove(ct);
-				Entity entityAtEnd = level.Entities.FirstOrDefault(e => e.Position == move.EndPosition);
-				if (entityAtEnd != null) mover.Move(new Move(entityAtEnd, move.StartPosition));
-				float duration = mover.Move(move);
-				await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: ct);
+				float moveDuration = 0;
+				await foreach (Move move in moveMaker.MakeMoves(ct))
+					moveDuration = Mathf.Max(mover.Move(move), moveDuration);
+				await UniTask.Delay(TimeSpan.FromSeconds(moveDuration), cancellationToken: ct);
 				await normalizer.Normalize(ct);
+
+				if (winCondition.IsMet()) return;
 			}
 		}
 	}

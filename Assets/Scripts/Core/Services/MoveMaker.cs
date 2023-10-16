@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using CameraManagement;
 using Core.Entities;
@@ -23,7 +25,18 @@ namespace Core.Services
 			_input = input;
 		}
 
-		public async UniTask<Move> MakeMove(CancellationToken ct)
+		public async IAsyncEnumerable<Move> MakeMoves([EnumeratorCancellation] CancellationToken ct)
+		{
+			Move move = await MakeMove(ct);
+			if (move.Entity == null) yield break;
+
+			yield return move;
+			Vector2Int endPosition = move.EndPosition;
+			Entity entityAtEnd = _level.Entities.FirstOrDefault(e => e.Position == endPosition);
+			if (entityAtEnd != null) yield return new Move(entityAtEnd, move.StartPosition);
+		}
+
+		private async UniTask<Move> MakeMove(CancellationToken ct)
 		{
 			while (!ct.IsCancellationRequested)
 			{
