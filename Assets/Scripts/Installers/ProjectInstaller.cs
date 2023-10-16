@@ -33,7 +33,8 @@ namespace Installers
 			BindInstance(_gridConfig);
 
 			BindInput();
-			
+
+			Container.Bind<LevelsProvider>().AsSingle();
 			Container.Bind<LevelFactory>().AsSingle();
 			Container.Bind<EntitiesFactory>().AsSingle();
 			Container.Bind<VisualsService>().AsSingle();

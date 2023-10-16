@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Core.GameStates.LevelsLoading;
 using StateMachines;
 using Zenject;
 
@@ -25,6 +26,9 @@ namespace Core.GameStates
 			AddState<BootstrapState>(instantiator, extraArgs);
 			AddState<BuildLevelState>(instantiator, extraArgs);
 			AddState<PlayLevelState>(instantiator, extraArgs);
+			AddState<LoadNextLevelState>(instantiator, extraArgs);
+			AddState<RestartLevelState>(instantiator, extraArgs);
+			AddState<LoadLevelState>(instantiator, extraArgs);
 			AddState<CompleteLevelState>(instantiator, extraArgs);
 		}
 

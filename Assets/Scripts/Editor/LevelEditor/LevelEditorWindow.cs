@@ -59,7 +59,7 @@ namespace Editor.LevelEditor
 		private void Validate()
 		{
 			if (SO != null) return;
-			
+			if (Level == null) Close();
 			Size = Level.Size;
 			LevelPadding = Level.Padding;
 			Entities = Level.Entities.Select(e => new EntityDescription(e)).ToList();

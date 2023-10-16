@@ -23,7 +23,7 @@ namespace Core.Services
 			while (!ct.IsCancellationRequested)
 			{
 				float moveDuration = 0;
-				await foreach (Move move in moveMaker.MakeMoves(ct))
+				foreach (Move move in await moveMaker.MakeMoves(ct))
 					moveDuration = Mathf.Max(mover.Move(move), moveDuration);
 				await UniTask.Delay(TimeSpan.FromSeconds(moveDuration), cancellationToken: ct);
 				await normalizer.Normalize(ct);

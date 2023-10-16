@@ -25,15 +25,16 @@ namespace Core.Services
 			_input = input;
 		}
 
-		public async IAsyncEnumerable<Move> MakeMoves([EnumeratorCancellation] CancellationToken ct)
+		public async UniTask<IEnumerable<Move>> MakeMoves(CancellationToken ct)
 		{
 			Move move = await MakeMove(ct);
-			if (move.Entity == null) yield break;
-
-			yield return move;
+			if (move.Entity == null) return null;
+			
 			Vector2Int endPosition = move.EndPosition;
 			Entity entityAtEnd = _level.Entities.FirstOrDefault(e => e.Position == endPosition);
-			if (entityAtEnd != null) yield return new Move(entityAtEnd, move.StartPosition);
+			return entityAtEnd != null 
+				? new[] {move, new Move(entityAtEnd, move.StartPosition)} 
+				: new[] {move};
 		}
 
 		private async UniTask<Move> MakeMove(CancellationToken ct)
