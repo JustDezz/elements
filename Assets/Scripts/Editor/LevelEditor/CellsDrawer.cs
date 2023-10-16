@@ -42,7 +42,13 @@ namespace Editor.LevelEditor
 		public void DrawCell(Rect rect)
 		{
 			if (!ShouldDraw()) return;
-			DrawTexture(rect, _cellTexture, new Color(0.17f, 0.17f, 0.17f));
+			DrawTexture(rect, _cellTexture, new Color(0.18f, 0.18f, 0.18f));
+		}
+
+		public void DrawPaddingCell(Rect rect)
+		{
+			if (!ShouldDraw()) return;
+			DrawTexture(rect, _cellTexture, new Color(0.15f, 0.15f, 0.15f));
 		}
 
 		public void DrawSelection(Rect rect)

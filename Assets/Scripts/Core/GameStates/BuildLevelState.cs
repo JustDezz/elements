@@ -36,8 +36,8 @@ namespace Core.GameStates
 		{
 			CellGrid grid = level.Grid;
 			GameCamera camera = _cameraFactory.GetCamera();
-			Vector3 min = grid.ToWorld(new Vector2Int(-1, 0), Vector2.zero);
-			Vector3 max = grid.ToWorld(level.Size + new Vector2Int(0, -1), Vector2.one);
+			Vector3 min = grid.ToWorld(Vector2Int.zero, Vector2.zero);
+			Vector3 max = grid.ToWorld(level.Size, Vector2.zero);
 			Bounds levelBounds = new();
 			levelBounds.SetMinMax(min, max);
 			camera.Frame(levelBounds);

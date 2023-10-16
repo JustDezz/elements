@@ -38,7 +38,9 @@ namespace Core.Levels
 			entitiesRoot.parent = context.LevelRoot;
 			context.EntitiesRoot = entitiesRoot;
 
-			return _entitiesFactory.Create(context.Description.Entities, context.Grid, context.EntitiesRoot);
+			LevelDescription level = context.Description;
+			EntityDescription[] descriptions = level.Entities;
+			return _entitiesFactory.Create(descriptions, context.Grid, entitiesRoot, new Vector2Int(level.Padding, 0));
 		}
 	}
 }

@@ -7,7 +7,7 @@ namespace Core.Levels
 	public class Level
 	{
 		public LevelDescription Description { get; }
-		public Vector2Int Size => Description.Size;
+		public Vector2Int Size { get; }
 		public Transform Root { get; }
 		public Entity[] Entities { get; }
 		public CellGrid Grid { get; }
@@ -17,6 +17,7 @@ namespace Core.Levels
 			Root = root;
 			Description = description;
 			Entities = entities;
+			Size = Description.Size + new Vector2Int(Description.Padding * 2, 0);
 			Grid = grid;
 		}
 	}

@@ -34,14 +34,14 @@ namespace Core.Entities
 			}
 		}
 
-		public Entity[] Create(EntityDescription[] descriptions, CellGrid grid, Transform parent)
+		public Entity[] Create(EntityDescription[] descriptions, CellGrid grid, Transform parent, Vector2Int padding)
 		{
 			Entity[] entities = new Entity[descriptions.Length];
 
 			for (int i = 0; i < descriptions.Length; i++)
 			{
 				EntityDescription description = descriptions[i];
-				Vector2Int cellIndex = description.Position;
+				Vector2Int cellIndex = description.Position + padding;
 				Entity entity = Create(description.Data, parent);
 				
 				Transform entityTransform = entity.transform;

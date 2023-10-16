@@ -11,6 +11,7 @@ namespace Editor.LevelEditor
 		// ReSharper disable once InconsistentNaming
 		private SerializedObject SO => _window.SO;
 		private Vector2Int Size => _window.Size;
+		private int LevelPadding => _window.LevelPadding;
 		private EntityDescription CurrentEntity
 		{
 			get => _window.CurrentEntity;
@@ -29,6 +30,10 @@ namespace Editor.LevelEditor
 
 			EditorGUILayout.PropertyField(SO.FindProperty(nameof(Size)));
 			EditorGUILayout.Space(EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing);
+			EditorGUILayout.PropertyField(SO.FindProperty(nameof(LevelPadding)));
+			
+			if (SO.hasModifiedProperties) _window.Dirty();
+			
 			EditorGUILayout.PropertyField(SO.FindProperty(nameof(CurrentEntity)), true);
 
 			SO.ApplyModifiedProperties();

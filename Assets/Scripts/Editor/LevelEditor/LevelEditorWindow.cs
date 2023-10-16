@@ -10,6 +10,7 @@ namespace Editor.LevelEditor
 	public class LevelEditorWindow : EditorWindow
 	{
 		[SerializeField] [Min(1)] internal Vector2Int Size;
+		[SerializeField] [Min(0)] internal int LevelPadding;
 		[SerializeReference] internal List<EntityDescription> Entities;
 		[SerializeReference] internal EntityDescription CurrentEntity;
 		
@@ -60,6 +61,7 @@ namespace Editor.LevelEditor
 			if (SO != null) return;
 			
 			Size = Level.Size;
+			LevelPadding = Level.Padding;
 			Entities = Level.Entities.Select(e => new EntityDescription(e)).ToList();
 			CurrentEntity = new EntityDescription();
 			_grid = new LevelEditorGrid(this);
@@ -107,6 +109,7 @@ namespace Editor.LevelEditor
 			Size = size + Vector2Int.one;
 
 			Level.Size = Size;
+			Level.Padding = LevelPadding;
 			Level.Entities = savedEntities;
 
 			EditorUtility.SetDirty(Level);
