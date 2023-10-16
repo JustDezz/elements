@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.Entities;
 using Core.Levels;
 using Tools.Extensions;
@@ -6,8 +7,11 @@ using UnityEngine;
 
 namespace Core.Services.NormalizationRules
 {
+	[Serializable]
 	public abstract class PropagateRule : NormalizationRule
 	{
+		[SerializeField] [Min(0)] private int _countToNormalize = 3;
+		
 		protected abstract bool CanPropagate(Entity from, Entity to);
 		
 		public override List<Entity> Normalize(Level level, Entity[,] entities, Vector2Int start)
@@ -46,7 +50,7 @@ namespace Core.Services.NormalizationRules
 			int countForwards = TraceEntities(entities, from, direction);
 			int countBackwards = TraceEntities(entities, from, -direction);
 			int totalCount = countBackwards + 1 + countForwards;
-			bool savePropagation = totalCount >= 3;
+			bool savePropagation = totalCount >= _countToNormalize;
 
 			for (int i = 0; i < totalCount; i++)
 			{

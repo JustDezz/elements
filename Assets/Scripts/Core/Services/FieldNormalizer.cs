@@ -5,6 +5,7 @@ using Core.Entities;
 using Core.Levels;
 using Core.Services.NormalizationRules;
 using Cysharp.Threading.Tasks;
+using Data.Entities;
 using Tools.Extensions;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -16,11 +17,13 @@ namespace Core.Services
 		private readonly Level _level;
 		private readonly EntityMover _mover;
 		private readonly Entity[,] _entities;
+		private readonly EntityConfigsProvider _configsProvider;
 
-		public FieldNormalizer(Level level, EntityMover mover)
+		public FieldNormalizer(Level level, EntityMover mover, EntityConfigsProvider configsProvider)
 		{
 			_level = level;
 			_mover = mover;
+			_configsProvider = configsProvider;
 
 			_entities = new Entity[_level.Size.x, _level.Size.y];
 			SyncGrid();
@@ -40,7 +43,6 @@ namespace Core.Services
 		private async UniTask<bool> Destroy(CancellationToken ct)
 		{
 			Vector2Int gridSize = _entities.GetSize();
-			NormalizationRule rule = new BrickPropagateRule();
 			HashSet<Vector2Int> toDestroy = new();
 			for (int x = 0; x < gridSize.x; x++)
 			for (int y = 0; y < gridSize.y; y++)
@@ -48,7 +50,11 @@ namespace Core.Services
 				Vector2Int start = new(x, y);
 				if (toDestroy.Contains(start)) continue;
 
-				List<Entity> normalized = rule.Normalize(_level, _entities, start);
+				Entity startEntity = _entities[x, y];
+				EntityConfig entityConfig = _configsProvider.GetConfig(startEntity);
+				if (entityConfig == null) continue;
+				NormalizationRule rule = entityConfig.NormalizationRule;
+				List<Entity> normalized = rule?.Normalize(_level, _entities, start);
 				if (normalized == null || normalized.Count == 0) continue;
 
 				foreach (Entity entity in normalized) toDestroy.Add(entity.Position);

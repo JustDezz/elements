@@ -1,7 +1,9 @@
-﻿using Core.Entities;
+﻿using System;
+using Core.Entities;
 
 namespace Core.Services.NormalizationRules
 {
+	[Serializable]
 	public class BrickPropagateRule : PropagateRule
 	{
 		protected override bool CanPropagate(Entity from, Entity to)

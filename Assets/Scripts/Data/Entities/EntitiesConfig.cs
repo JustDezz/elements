@@ -1,5 +1,4 @@
-﻿using Core.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Data.Entities
 {
@@ -7,9 +6,9 @@ namespace Data.Entities
 	public class EntitiesConfig : ScriptableObject
 	{
 		[SerializeField] private float _speed;
-		[SerializeField] private Entity[] _entitiesPrefabs;
+		[SerializeField] private EntityConfig[] _entities;
 
 		public float Speed => _speed;
-		public Entity[] EntitiesPrefabs => _entitiesPrefabs;
+		public EntityConfig[] Entities => _entities;
 	}
 }

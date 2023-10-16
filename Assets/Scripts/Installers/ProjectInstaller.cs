@@ -39,6 +39,8 @@ namespace Installers
 			Container.Bind<VisualsService>().AsSingle();
 			Container.Bind<LevelCleaner>().AsSingle();
 			Container.Bind<LevelPlayer>().AsSingle();
+			Container.Bind<EntityConfigsProvider>().AsSingle();
+			
 			Container.BindInterfacesTo<CameraFactory>()
 				.FromInstance(new CameraFactory(_cameraConfig))
 				.AsSingle();

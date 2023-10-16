@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Core.Levels;
+﻿using Core.Levels;
 using Data.Entities;
 using Data.Levels;
 using Tools.Extensions;
@@ -12,26 +10,12 @@ namespace Core.Entities
 	public class EntitiesFactory
 	{
 		private readonly IInstantiator _instantiator;
-		private readonly Dictionary<Type, Entity> _prefabs;
+		private readonly EntityConfigsProvider _configsProvider;
 
-		public EntitiesFactory(EntitiesConfig config, IInstantiator instantiator)
+		public EntitiesFactory(IInstantiator instantiator, EntityConfigsProvider configsProvider)
 		{
+			_configsProvider = configsProvider;
 			_instantiator = instantiator;
-			
-			_prefabs = new Dictionary<Type, Entity>();
-			foreach (Entity prefab in config.EntitiesPrefabs)
-			{
-				if (prefab == null) continue;
-				
-				Type dataType = GetDataType(prefab);
-				if (dataType == null)
-				{
-					Debug.LogError($"Can't find required data type for {prefab.GetType()} {prefab.name}", prefab);
-					continue;
-				}
-				
-				_prefabs.Add(dataType, prefab);
-			}
 		}
 
 		public Entity[] Create(EntityDescription[] descriptions, CellGrid grid, Transform parent, Vector2Int padding)
@@ -56,28 +40,11 @@ namespace Core.Entities
 		
 		public Entity Create(EntityData entityData, Transform parent)
 		{
-			Entity prefab = _prefabs[entityData.GetType()];
+			EntityConfig config = _configsProvider.GetConfigByData(entityData.GetType());
+			Entity prefab = config.Prefab;
 			Entity entity = _instantiator.InstantiatePrefabForComponent<Entity>(prefab, parent);
 			entity.SetGenericData(entityData);
 			return entity;
-		}
-
-		private static Type GetDataType(Entity entity)
-		{
-			if (entity == null) return null;
-
-			Type entityType = entity.GetType();
-			Type baseType = entityType.BaseType;
-			while (baseType != null)
-			{
-				foreach (Type argument in baseType.GenericTypeArguments)
-					if (argument.Extends(typeof(EntityData)))
-						return argument;
-
-				baseType = baseType.BaseType;
-			}
-
-			return null;
 		}
 	}
 }
