@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraPrefab: {fileID: 8733261716546626907, guid: bd52fd739e2a38241b8ee0ffdba724f7, type: 3}
   _distance: 5
-  _horizontalViewport: {x: 0, y: 1}
+  _horizontalViewport: {x: 0.05, y: 0.95}
   _verticalViewport: {x: 0.1, y: 0.8}
   _rotation: {x: 0, y: 0, z: 0}
