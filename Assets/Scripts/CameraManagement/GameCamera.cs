@@ -6,16 +6,17 @@ namespace CameraManagement
 	public class GameCamera : MonoBehaviour
 	{
 		[SerializeField] private Camera _camera;
-		[SerializeField] private CameraConfig _config;
 		
 		private Bounds _bounds;
 
 		public Camera Camera => _camera;
+		public CameraConfig Config { get; set; }
 
 		public void Frame(Bounds bounds)
 		{
 			_bounds = bounds;
-			Quaternion rotation = Quaternion.Euler(_config.Rotation);
+			if (Config == null) return;
+			Quaternion rotation = Quaternion.Euler(Config.Rotation);
 			Vector3 forward = rotation * Vector3.forward;
 			Vector3 up = rotation * Vector3.up;
 			Vector3 right = rotation * Vector3.right;
@@ -23,8 +24,8 @@ namespace CameraManagement
 			Bounds projectedBounds = bounds.ProjectOnPlane(bounds.center, -forward, up, right, false);
 			Vector2 frameSize = projectedBounds.size;
 
-			Vector2 horizontalViewport = _config.HorizontalViewport;
-			Vector2 verticalViewport = _config.VerticalViewport;
+			Vector2 horizontalViewport = Config.HorizontalViewport;
+			Vector2 verticalViewport = Config.VerticalViewport;
 			float cameraSize = GetCameraSize(frameSize, horizontalViewport, verticalViewport);
 
 			float horizontalViewportOffset = GetViewportOffset(horizontalViewport);
@@ -35,7 +36,7 @@ namespace CameraManagement
 
 			Vector2 viewportOffset = new(horizontalViewportOffset / 2, verticalViewportOffset + verticalOffset);
 			Vector3 offset = (viewportOffset.x * right + viewportOffset.y * up) * cameraSize;
-			Vector3 position = bounds.center - forward * _config.Distance + offset;
+			Vector3 position = bounds.center - forward * Config.Distance + offset;
 
 			_camera.orthographicSize = cameraSize;
 			transform.SetPositionAndRotation(position, rotation);

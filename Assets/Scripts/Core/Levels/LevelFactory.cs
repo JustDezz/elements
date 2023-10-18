@@ -19,6 +19,13 @@ namespace Core.Levels
 
 		public Level Create(LevelDescription description)
 		{
+			Level level = CreateLevel(description);
+			CreateVisuals(description, level);
+			return level;
+		}
+
+		private Level CreateLevel(LevelDescription description)
+		{
 			LevelCreationContext context = new()
 			{
 				Description = description,
@@ -27,16 +34,18 @@ namespace Core.Levels
 			};
 
 			context.Entities = CreateEntities(context);
-			_visualsService.ApplyVisuals(description.Visuals, context.Entities);
-			
-			return context.ToLevel();
+
+			Level level = context.ToLevel();
+			return level;
 		}
+
+		private void CreateVisuals(LevelDescription description, Level level) =>
+			_visualsService.ApplyVisuals(description.Visuals, level);
 
 		private Entity[] CreateEntities(LevelCreationContext context)
 		{
 			Transform entitiesRoot = new GameObject("Entities").transform;
 			entitiesRoot.parent = context.LevelRoot;
-			context.EntitiesRoot = entitiesRoot;
 
 			LevelDescription level = context.Description;
 			EntityDescription[] descriptions = level.Entities;

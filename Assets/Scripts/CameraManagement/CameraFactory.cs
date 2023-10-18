@@ -13,6 +13,7 @@ namespace CameraManagement
 		public GameCamera GetCamera()
 		{
 			if (Camera == null) Camera = Object.Instantiate(_config.CameraPrefab);
+			Camera.Config = _config;
 			return Camera;
 		}
 	}

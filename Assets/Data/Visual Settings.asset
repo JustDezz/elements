@@ -15,3 +15,4 @@ MonoBehaviour:
   _brickViews:
   - {fileID: 2033941335187920324, guid: 3ed984f7336c4214f816d6ea5c4222a2, type: 3}
   - {fileID: 2033941335187920324, guid: e4b71f6d5ac6bde4e8a176f369be5338, type: 3}
+  _environment: {fileID: 6610568907509105855, guid: 16d91553b7ffd724a977d9a7813b1903, type: 3}

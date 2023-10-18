@@ -8,17 +8,23 @@ namespace Core.Levels
 	{
 		public LevelDescription Description { get; }
 		public Vector2Int Size { get; }
+		public Bounds Bounds { get; }
 		public Transform Root { get; }
 		public Entity[] Entities { get; }
 		public CellGrid Grid { get; }
 		
 		public Level(LevelDescription description, Transform root, Entity[] entities, CellGrid grid)
 		{
-			Root = root;
 			Description = description;
+			Root = root;
 			Entities = entities;
-			Size = Description.Size + new Vector2Int(Description.Padding * 2, 0);
 			Grid = grid;
+			Size = Description.Size + new Vector2Int(Description.Padding * 2, 0);
+			Bounds = new Bounds
+			{
+				min = Grid.ToWorld(Vector2Int.zero, Vector2.zero),
+				max = Grid.ToWorld(Size, Vector2.zero)
+			};
 		}
 	}
 }

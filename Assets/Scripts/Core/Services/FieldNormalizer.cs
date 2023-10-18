@@ -75,7 +75,7 @@ namespace Core.Services
 			foreach (Vector2Int position in toDestroy)
 			{
 				Entity entity = _entities[position.x, position.y];
-				_entities[position.x, position.y] = default;
+				_entities[position.x, position.y] = null;
 				Object.Destroy(entity.gameObject);
 			}
 
@@ -110,7 +110,7 @@ namespace Core.Services
 				if (entity == null) continue;
 				Vector2Int endIndex = new(column, dropTo + droppedEntities);
 				_entities[endIndex.x, endIndex.y] = entity;
-				_entities[column, y] = default;
+				_entities[column, y] = null;
 
 				Move move = new(entity, endIndex);
 				duration = _mover.Move(move);
@@ -129,6 +129,7 @@ namespace Core.Services
 
 			foreach (Entity entity in _level.Entities)
 			{
+				if (entity == null) continue;
 				Vector2Int position = entity.Position;
 				_entities[position.x, position.y] = entity;
 			}
