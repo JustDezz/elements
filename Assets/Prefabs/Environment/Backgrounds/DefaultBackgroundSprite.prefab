@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3164138722002201483, guid: ba321310d0336434490f86cd131f3bca, type: 3}
       propertyPath: _groundHeight
-      value: 0.13
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 6503475157507582756, guid: ba321310d0336434490f86cd131f3bca, type: 3}
       propertyPath: m_RootOrder

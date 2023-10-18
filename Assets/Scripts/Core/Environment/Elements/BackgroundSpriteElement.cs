@@ -4,7 +4,7 @@ using Tools.Extensions;
 using UnityEngine;
 using Zenject;
 
-namespace Core.Environment
+namespace Core.Environment.Elements
 {
 	public class BackgroundSpriteElement : EnvironmentElement
 	{
