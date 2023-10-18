@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using System.Linq;
+using Core.Entities;
 using Data.Levels;
 using UnityEngine;
 
@@ -26,5 +27,7 @@ namespace Core.Levels
 				max = Grid.ToWorld(Size, Vector2.zero)
 			};
 		}
+
+		public Entity GetEntityAtPosition(Vector2Int position) => Entities.FirstOrDefault(e => e != null && e.Position == position);
 	}
 }

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using CameraManagement;
 using Core.Entities;
@@ -31,7 +29,7 @@ namespace Core.Services
 			if (move.Entity == null) return null;
 			
 			Vector2Int endPosition = move.EndPosition;
-			Entity entityAtEnd = _level.Entities.FirstOrDefault(e => e.Position == endPosition);
+			Entity entityAtEnd = _level.GetEntityAtPosition(endPosition);
 			return entityAtEnd != null 
 				? new[] {move, new Move(entityAtEnd, move.StartPosition)} 
 				: new[] {move};
@@ -80,7 +78,7 @@ namespace Core.Services
 			Vector2Int endPosition = startPosition + direction;
 			if (direction.y == 1)
 			{
-				Entity above = _level.Entities.FirstOrDefault(e => e.Position == endPosition);
+				Entity above = _level.GetEntityAtPosition(endPosition);
 				if (above == null) return false;
 			}
 
