@@ -1,12 +1,15 @@
 ﻿using CameraManagement;
 using Core.Levels;
 using Data.Levels;
+using GameUI;
+using GameUI.Panels;
 using StateMachines;
 
 namespace Core.GameStates
 {
 	public class BuildLevelState : PayloadState<LevelDescription>
 	{
+		private readonly IUIManager _uiManager;
 		private readonly LevelFactory _levelFactory;
 		private readonly ICameraFactory _cameraFactory;
 		
@@ -14,9 +17,11 @@ namespace Core.GameStates
 
 		public BuildLevelState(
 			StateMachine stateMachine,
+			IUIManager uiManager,
 			LevelFactory levelFactory,
 			ICameraFactory cameraFactory) : base(stateMachine)
 		{
+			_uiManager = uiManager;
 			_cameraFactory = cameraFactory;
 			_levelFactory = levelFactory;
 		}
@@ -25,6 +30,12 @@ namespace Core.GameStates
 
 		public override void OnEnter()
 		{
+			if (_uiManager.TryGet<GameHud>() == null)
+			{
+				GameHud hud = _uiManager.Open<GameHud>();
+				hud.SetRestartActive(false);
+			}
+			
 			Level level = _levelFactory.Create(_currentLevel);
 			SetupCamera(level);
 			

@@ -1,22 +1,16 @@
 ﻿using Core.Services;
-using Data.Levels;
 using StateMachines;
 
 namespace Core.GameStates.LevelsLoading
 {
-	public class LoadNextLevelState : State
+	public class LoadNextLevelState : LoadCurrentLevelState
 	{
-		private readonly LevelsProvider _levelsProvider;
-
-		public LoadNextLevelState(StateMachine stateMachine, LevelsProvider levelsProvider) : base(stateMachine) =>
-			_levelsProvider = levelsProvider;
+		public LoadNextLevelState(StateMachine stateMachine, LevelsProvider levelsProvider) : base(stateMachine, levelsProvider) {}
 
 		public override void OnEnter()
 		{
-			_levelsProvider.MoveNext();
-			StateMachine.Enter<BuildLevelState, LevelDescription>(_levelsProvider.Current);
+			LevelsProvider.MoveNext();
+			base.OnEnter();
 		}
-
-		public override void OnExit() { }
 	}
 }

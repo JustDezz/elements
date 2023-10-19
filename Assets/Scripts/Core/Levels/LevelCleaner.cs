@@ -6,6 +6,7 @@ namespace Core.Levels
 	{
 		public void Clear(Level level)
 		{
+			if (level == null) return;
 			if (level.Root != null) Object.Destroy(level.Root.gameObject);
 		}
 	}

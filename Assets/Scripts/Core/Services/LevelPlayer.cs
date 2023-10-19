@@ -15,6 +15,8 @@ namespace Core.Services
 
 		public async UniTask Play(Level level, CancellationToken ct)
 		{
+			ct.ThrowIfCancellationRequested();
+			
 			object[] extraArgs = {level};
 			MoveMaker moveMaker = _instantiator.Instantiate<MoveMaker>(extraArgs);
 			EntityMover mover = _instantiator.Instantiate<EntityMover>(extraArgs);
