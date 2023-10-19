@@ -1,5 +1,4 @@
 ﻿using Core.GameStates.LevelsLoading;
-using GameInput;
 using GameUI;
 using GameUI.Panels;
 using StateMachines;
@@ -15,7 +14,6 @@ namespace Core.GameStates
 
 		public override void OnEnter()
 		{
-			if (_container.Resolve<IInput>() is InputBase input) input.InputLoop(((GameStateMachine) StateMachine).CT).Forget();
 			_container.Resolve<IUIFactory>().SpawnRoot();
 
 			Backdrop.Drop(0);
