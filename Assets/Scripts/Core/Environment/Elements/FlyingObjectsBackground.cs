@@ -13,7 +13,7 @@ namespace Core.Environment.Elements
 	{
 		[SerializeField] private FlyingObject[] _prefabs;
 		[SerializeField] [Min(0)] private int _maxElements;
-		[SerializeField] [Min(0)] private int _spawnAtStart;
+		[SerializeField] [Min(0)] private Vector2Int _spawnAtStart;
 		[SerializeField] private float _spawnDelay;
 
 		[Space]
@@ -36,9 +36,10 @@ namespace Core.Environment.Elements
 
 		private void Start()
 		{
-			if (_spawnAtStart == 0) return;
+			int toSpawn = _spawnAtStart.GetRandom();
+			if (toSpawn == 0) return;
 			_lastSpawnTime = Time.time;
-			for (int i = 0; i < _spawnAtStart; i++) _elements.Add(SpawnElement(_cameraService.Camera));
+			for (int i = 0; i < toSpawn; i++) _elements.Add(SpawnElement(_cameraService.Camera));
 		}
 
 		public override void Init(Level level) { }

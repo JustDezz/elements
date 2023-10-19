@@ -15,3 +15,4 @@ MonoBehaviour:
   _speed: 10
   _entities:
   - {fileID: 11400000, guid: bcf18e8d9fadc494a848ad36e5bfe909, type: 2}
+  - {fileID: 11400000, guid: 198e84a371797b440bb1af9ed256a304, type: 2}

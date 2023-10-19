@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a963f4985baf4b419567145989214bc2, type: 3}
+  m_Name: Stone Config
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3905388956495058005, guid: b3fe5f665a7880a4692e1b59b18d92b5, type: 3}
+  _isRequiredForLevelCompletion: 0
+  _normalizationRule:
+    rid: -2
+  _typeHint: StoneData
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

@@ -1,4 +1,5 @@
-﻿using Data.Entities;
+﻿using Core.Entities;
+using Data.Entities;
 using Data.Levels;
 using UnityEditor;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Editor.LevelEditor
 		private readonly Texture2D _highlightTexture;
 		private readonly Texture2D _whiteTexture;
 		private readonly Texture2D _brickTexture;
+		private readonly Texture2D _stoneTexture;
 
 		private readonly Color[] _brickColors;
 		private readonly GUIStyle _textStyle;
@@ -22,6 +24,7 @@ namespace Editor.LevelEditor
 			_highlightTexture = (Texture2D) EditorGUIUtility.Load(texturesFolder + "HighlightTexture.png");
 			_whiteTexture = (Texture2D) EditorGUIUtility.Load(texturesFolder + "WhiteTexture.png");
 			_brickTexture = (Texture2D) EditorGUIUtility.Load(texturesFolder + "BrickTexture.png");
+			_stoneTexture = (Texture2D) EditorGUIUtility.Load(texturesFolder + "StoneTexture.png");
 
 			_brickColors = new[]
 			{
@@ -69,6 +72,7 @@ namespace Editor.LevelEditor
 			switch (entity.Data)
 			{
 				case BrickData brick: DrawBrick(rect, brick); break;
+				case Stone.StoneData: DrawStone(rect); break;
 				case null: break;
 				default: DrawGenericEntity(rect, entity); break;
 			}
@@ -82,10 +86,12 @@ namespace Editor.LevelEditor
 			DrawText(rect, group.ToString(), Color.white, true);
 		}
 
+		private void DrawStone(Rect rect) => DrawTexture(rect, _stoneTexture, new Color(0.49f, 0.44f, 0.41f));
+
 		private void DrawGenericEntity(Rect rect, EntityDescription entity)
 		{
 			DrawTexture(rect, _whiteTexture, Color.gray);
-			DrawText(rect, entity.GetType().Name, Color.black, true);
+			DrawText(rect, entity.Data?.GetType().Name, Color.black, true);
 		}
 
 		private static bool ShouldDraw() => Event.current.type is EventType.Layout or EventType.Repaint;

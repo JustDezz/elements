@@ -48,7 +48,7 @@ MonoBehaviour:
   - {fileID: 7102449908319139712, guid: b648e12bd48fae94381de24f43b4e55b, type: 3}
   - {fileID: 7102449908319139712, guid: 7db61944efefb6c4d97f323e81a3d202, type: 3}
   _maxElements: 3
-  _spawnAtStart: 2
+  _spawnAtStart: {x: 0, y: 2}
   _spawnDelay: 3
   _spawnSides: 2
   _viewportRange: {x: 0.4, y: 0.7}

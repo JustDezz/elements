@@ -71,9 +71,13 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7086350912736513249, guid: d74867492f2a0d340b92e449a9940b37, type: 3}
+      propertyPath: _destroyAnimationDuration
+      value: 0.9166667
+      objectReference: {fileID: 0}
     - target: {fileID: 8157128300495186796, guid: d74867492f2a0d340b92e449a9940b37, type: 3}
       propertyPath: m_Name
-      value: Brick_Water
+      value: Brick_Water_View
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d74867492f2a0d340b92e449a9940b37, type: 3}

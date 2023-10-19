@@ -68,7 +68,7 @@ namespace Core.Services
 				Entity entity = _entities[position.x, position.y];
 				if (!entity.TryResolve(out EntityAnimator animator)) continue;
 				animator.Play(EntityAnimations.Names.Destroy);
-				delay = Mathf.Max(delay, animator.GetCurrentAnimationDuration());
+				delay = Mathf.Max(delay, animator.GetDestroyAnimationDuration());
 			}
 
 			await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: ct);
