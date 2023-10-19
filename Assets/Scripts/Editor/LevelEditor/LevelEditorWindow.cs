@@ -51,7 +51,9 @@ namespace Editor.LevelEditor
 				margin + gridArea.x + spacing + editArea.x + margin,
 				margin + gridArea.y + margin);
 			
+			window.SO = null;
 			window.Level = level;
+			window.titleContent = new GUIContent(level.name);
 
 			window.Show();
 		}
