@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 496952d1a9a64e6798e34cfcf0f53f43, type: 3}
+  m_Name: Level 6
+  m_EditorClassIdentifier: 
+  _visuals: {fileID: 11400000, guid: 0bf0a4dcb176c98429f3202fff672f50, type: 2}
+  _size: {x: 3, y: 4}
+  _padding: 1
+  _entities:
+  - _position: {x: 0, y: 0}
+    _data:
+      rid: 317482221180027470
+  - _position: {x: 1, y: 0}
+    _data:
+      rid: 317482221180027471
+  - _position: {x: 2, y: 0}
+    _data:
+      rid: 317482221180027472
+  - _position: {x: 0, y: 1}
+    _data:
+      rid: 317482221180027473
+  - _position: {x: 1, y: 1}
+    _data:
+      rid: 317482221180027474
+  - _position: {x: 2, y: 1}
+    _data:
+      rid: 317482221180027475
+  - _position: {x: 0, y: 2}
+    _data:
+      rid: 317482221180027476
+  - _position: {x: 1, y: 2}
+    _data:
+      rid: 317482221180027477
+  - _position: {x: 2, y: 2}
+    _data:
+      rid: 317482221180027478
+  - _position: {x: 0, y: 3}
+    _data:
+      rid: 317482221180027479
+  - _position: {x: 1, y: 3}
+    _data:
+      rid: 317482221180027480
+  - _position: {x: 2, y: 3}
+    _data:
+      rid: 317482221180027481
+  references:
+    version: 2
+    RefIds:
+    - rid: 317482221180027470
+      type: {class: Stone/StoneData, ns: Core.Entities, asm: Assembly-CSharp}
+    - rid: 317482221180027471
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
+    - rid: 317482221180027472
+      type: {class: Stone/StoneData, ns: Core.Entities, asm: Assembly-CSharp}
+    - rid: 317482221180027473
+      type: {class: Stone/StoneData, ns: Core.Entities, asm: Assembly-CSharp}
+    - rid: 317482221180027474
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
+    - rid: 317482221180027475
+      type: {class: Stone/StoneData, ns: Core.Entities, asm: Assembly-CSharp}
+    - rid: 317482221180027476
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
+    - rid: 317482221180027477
+      type: {class: Stone/StoneData, ns: Core.Entities, asm: Assembly-CSharp}
+    - rid: 317482221180027478
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
+    - rid: 317482221180027479
+      type: {class: Stone/StoneData, ns: Core.Entities, asm: Assembly-CSharp}
+    - rid: 317482221180027480
+      type: {class: BrickData, ns: Data.Entities, asm: Assembly-CSharp}
+      data:
+        _group: 1
+    - rid: 317482221180027481
+      type: {class: Stone/StoneData, ns: Core.Entities, asm: Assembly-CSharp}
