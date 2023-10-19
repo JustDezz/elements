@@ -6,6 +6,7 @@ using Core.Services;
 using Data.Entities;
 using Data.Levels;
 using GameInput;
+using GameUI;
 using UnityEngine;
 using Zenject;
 
@@ -16,6 +17,7 @@ namespace Installers
 		[SerializeField] private EntitiesConfig _entitiesConfig;
 		[SerializeField] private LevelsConfig _levelsConfig;
 		[SerializeField] private GridConfig _gridConfig;
+		[SerializeField] private UIConfig _uiConfig;
 		[SerializeField] private CameraConfig _cameraConfig;
 
 		public void Initialize()
@@ -31,9 +33,12 @@ namespace Installers
 			BindInstance(_entitiesConfig);
 			BindInstance(_levelsConfig);
 			BindInstance(_gridConfig);
+			BindInstance(_uiConfig);
 
 			BindInput();
 
+			Container.BindInterfacesTo<UIFactory>().AsSingle();
+			Container.BindInterfacesTo<UIManager>().AsSingle();
 			Container.Bind<LevelsProvider>().AsSingle();
 			Container.Bind<LevelFactory>().AsSingle();
 			Container.Bind<EntitiesFactory>().AsSingle();
